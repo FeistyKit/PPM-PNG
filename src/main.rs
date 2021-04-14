@@ -10,8 +10,12 @@ fn main() {
         s.push_str(&format!("{}: {}\n", k, v));
     }
     let f = open_file(get_file_name(b, &s));
-    create_image(f).save("output.png").unwrap();
-    println!("Finished and saved as output.png!");
+    if f.contains("P3") {
+        create_image(f).save("output.png").unwrap();
+        println!("Finished and saved as output.png!");
+    } else {
+        println!("Not formatted correctly! Only works with P3!")
+    }
     pause();
 }
 fn read_from_dir() -> Vec<String> {
